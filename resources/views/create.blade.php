@@ -182,7 +182,8 @@
         <h1>Create New Product</h1>
         <p class="subtitle">Fill in the details below to add a new product</p>
 
-        <form id="productForm" action="">
+        <form id="productForm" action="{{ route('store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="form-group">
                 <label for="name">
                     Product Name <span class="required">*</span>
@@ -203,7 +204,7 @@
                 <input 
                     type="number" 
                     id="price" 
-                    name="price" 
+                    name="prix" 
                     placeholder="0.00"
                     step="0.01"
                     min="0"
@@ -241,19 +242,14 @@
             </div>
 
             <div class="form-group">
-                <label for="category_id">
+                <label for="categorie_id">
                     Category <span class="required">*</span>
                 </label>
-                <select id="category_id" name="category_id" required>
+                <select id="categorie_id" name="categorie_id" required>
                     <option value="">Select a category</option>
-                    <option value="1">Electronics</option>
-                    <option value="2">Clothing</option>
-                    <option value="3">Home & Garden</option>
-                    <option value="4">Sports & Outdoors</option>
-                    <option value="5">Books</option>
-                    <option value="6">Toys & Games</option>
-                    <option value="7">Beauty & Personal Care</option>
-                    <option value="8">Food & Beverages</option>
+                    <option value="1">plantes</option>
+                    <option value="2">outils</option>
+                    <option value="3">graines</option>
                 </select>
             </div>
 
@@ -264,7 +260,7 @@
         </form>
     </div>
 
-    <script>
+    <!-- <script>
         // Image preview functionality
         document.getElementById('image').addEventListener('change', function(e) {
             const file = e.target.files[0];
@@ -309,6 +305,6 @@
             document.getElementById('productForm').reset();
             document.getElementById('imagePreview').style.display = 'none';
         }
-    </script>
+    </script> -->
 </body>
 </html>

@@ -15,7 +15,7 @@ class Categorie extends Model
     //     'name',
     //    ];
     
-       protected $guarded=["id"];
+    //    protected $guarded=["id"];
   
        // Une category => plusieurs produits
        public function products()

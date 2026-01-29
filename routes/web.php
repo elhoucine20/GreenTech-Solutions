@@ -31,9 +31,9 @@ Route::get('/hi', function(){
 Route::get('/dashbordd', function(){
  return View('admin_dashbord');
 });
-Route::get('/create', function(){
- return View('create');
-});
+// Route::get('/create', function(){
+//  return View('create');
+// });
 Route::get('/edit', function(){
  return View('update');
 });
@@ -54,5 +54,11 @@ Route::get('/home', function(){
 // Route::get('/dashbord', [CategorieController::class, 'index']);
 
 Route::get('/dashbord', [ProduitController::class, 'index']);
-// Route::get('/delete', [ProduitController::class, 'destroy']);
 Route::get('/delete/{id}', [ProduitController::class, 'destroy']);
+Route::get('/create', [ProduitController::class, 'create'])->name('produits.create');
+Route::post('/produits', [ProduitController::class, 'store'])->name('store');
+
+
+
+
+

@@ -86,7 +86,7 @@
 
                 <!-- Add Button -->
                 <div class="lg:w-auto">
-                    <a href="create">
+                    <a href="/create">
                     <button class="w-full lg:w-auto px-6 py-3 bg-gradient-to-r from-leaf-600 to-leaf-700 hover:from-leaf-700 hover:to-leaf-800 text-white font-semibold rounded-2xl shadow-lg shadow-leaf-500/30 hover:shadow-xl hover:shadow-leaf-500/40 transition-all duration-300 flex items-center justify-center gap-2 group">
                         <svg class="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
