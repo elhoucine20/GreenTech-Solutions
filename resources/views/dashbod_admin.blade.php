@@ -140,6 +140,8 @@
                     <div class="mb-3">
                         <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-gradient-to-r from-leaf-100 to-leaf-200 text-leaf-800 text-xs font-bold rounded-full">
                             🌿 Plant
+                             {{$produit->categorie_id}}
+
                         </span>
                     </div>
 

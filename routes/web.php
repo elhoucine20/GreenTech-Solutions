@@ -34,31 +34,36 @@ Route::get('/dashbordd', function(){
 // Route::get('/create', function(){
 //  return View('create');
 // });
-Route::get('/edit', function(){
- return View('update');
-});
+// Route::get('/edit', function(){
+//  return View('update');
+// });
 // Route::get('/delete', function(){
 //  return View('');
 // });
-Route::get('/show', function(){
- return View('showProduct');
-});
-Route::get('/login', function(){
- return View('login');
-});
-Route::get('/home', function(){
- return View('home');
-});
+// Route::get('/show', function(){
+//  return View('showProduct');
+// });
+// Route::get('/login', function(){
+//  return View('login');
+// });
+// Route::get('/home', function(){
+//  return View('home');
+// });
 
 
 // Route::get('/dashbord', [CategorieController::class, 'index']);
 
 Route::get('/dashbord', [ProduitController::class, 'index']);
+
 Route::get('/delete/{id}', [ProduitController::class, 'destroy']);
+
 Route::get('/create', [ProduitController::class, 'create'])->name('produits.create');
+
 Route::post('/produits', [ProduitController::class, 'store'])->name('store');
 
+Route::get('/edit/{id}', [ProduitController::class, 'edit'])->name('edit');
 
+Route::put('/update/{id}', [ProduitController::class, 'update'])->name('update');
 
 
 

@@ -212,7 +212,9 @@
         <p class="subtitle">Modify the product details below</p>
         <div class="product-id-badge">Product ID: <span id="productIdDisplay">Loading...</span></div>
 
-        <form id="productForm" action="">
+        <form id="productForm" action="{{ route('update',$produit->id)}}" method="POST">
+            @csrf
+            @method('PUT')
             <input type="hidden" id="product_id" name="product_id">
 
             <div class="form-group">
@@ -223,6 +225,7 @@
                     type="text" 
                     id="name" 
                     name="name" 
+                    value="{{$produit->name}}"
                     placeholder="Enter product name"
                     required
                 >
@@ -235,7 +238,8 @@
                 <input 
                     type="number" 
                     id="price" 
-                    name="price" 
+                    name="prix" 
+                     value="{{$produit->prix}}"
                     placeholder="0.00"
                     step="0.01"
                     min="0"
@@ -249,11 +253,10 @@
                     Description <span class="required">*</span>
                 </label>
                 <textarea 
-                    id="description" 
+               
                     name="description" 
-                    placeholder="Enter product description"
-                    required
-                ></textarea>
+                     placeholder="Enter product description" required
+                >{{$produit->description}}</textarea>
             </div>
 
             <div class="form-group">
@@ -280,25 +283,19 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="category_id">
+        <div class="form-group">
+                <label for="categorie_id">
                     Category <span class="required">*</span>
                 </label>
-                <select id="category_id" name="category_id" required>
-                    <option value="">Select a category</option>
-                    <option value="1">Electronics</option>
-                    <option value="2">Clothing</option>
-                    <option value="3">Home & Garden</option>
-                    <option value="4">Sports & Outdoors</option>
-                    <option value="5">Books</option>
-                    <option value="6">Toys & Games</option>
-                    <option value="7">Beauty & Personal Care</option>
-                    <option value="8">Food & Beverages</option>
+                <select id="categorie_id" name="categorie_id"   required>
+                    <option value="1">plantes</option>
+                    <option value="2">outils</option>
+                    <option value="3">graines</option>
                 </select>
             </div>
 
             <div class="button-group">
-                <button type="button" class="btn-secondary" onclick="cancelUpdate()">Cancel</button>
+                <button type="button" class="btn-secondary" >Cancel</button>
                 <button type="submit" name="submit" class="btn-primary">Update Product</button>
             </div>
         </form>

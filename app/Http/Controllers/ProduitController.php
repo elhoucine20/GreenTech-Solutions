@@ -11,7 +11,7 @@ class ProduitController extends Controller
     //
     public function index()
     {
-        $produits = Produit::all();
+        $produits = Produit::orderBy('created_at', 'ASC')->get();
         // $produits = Produit::paginate(4);
         return view('dashbod_admin', compact('produits'));
         // require_once 'resources/views/dashbod_admin.blade.php';
@@ -32,9 +32,7 @@ class ProduitController extends Controller
 
     public function store(Request $request)
     {
-
         // dd($request->all());
-
         Produit::create([
             'name' => $request->name,
             'prix' => $request->prix,
@@ -53,6 +51,28 @@ class ProduitController extends Controller
         // description (details)
 
     }
-    public function update() {}
-    public function edit() {}
+
+    public function edit($id) {
+       $produit = Produit::find($id);
+        return view('edit',compact('produit'));
+        // dump($produit);
+    }
+
+    public function update(Request $request,$id) {
+        //   dd($request->all());
+      
+      
+          $produit = Produit::findOrFail($id);
+      
+          $produit->update([
+              'name' => $request->name,
+              'prix' => $request->prix,
+              'description' => $request->description,
+              'categorie_id' => $request->categorie_id,
+          ]);
+      
+             $produits = Produit::orderBy('created_at', 'ASC')->get();
+        return view('dashbod_admin', compact('produits'));
+    }
+    
 }
