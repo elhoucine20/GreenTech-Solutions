@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorie;
 use Illuminate\Http\Request;
 use App\Models\Produit;
 use Illuminate\View\View;
@@ -11,19 +12,19 @@ class ProduitController extends Controller
     //
     public function index()
     {
+        $categories = Categorie::all();
+
       $name = $_GET['query']??'';
-
-
-        $produits = Produit::where('name','LIKE','%'.$name.'%')->orderBy('created_at', 'ASC')->paginate(4);
-
-
-        return view('dashbod_admin', compact('produits'));
+        $produits = Produit::with('categorie')->where('name','LIKE','%'.$name.'%')->orderBy('created_at', 'ASC')->paginate(4);
+        return view('dashbod_admin', compact('produits','categories'));
     }
 
 
     public function create()
     {
-        return view('create');
+        $categories = Categorie::all();
+
+        return view('create',compact('categories'));
     }
 
     public function destroy($id)
@@ -59,7 +60,9 @@ class ProduitController extends Controller
 
     public function edit($id) {
        $produit = Produit::find($id);
-        return view('edit',compact('produit'));
+        $categories = Categorie::all();
+
+        return view('edit',compact('produit','categories'));
         // dump($produit);
     }
 
@@ -77,7 +80,16 @@ class ProduitController extends Controller
           ]);
       
            return $this->index();
-
     }
+
+
+    public function filter($id){
+      
+             $produits = Produit::with('categorie')->where('categorie_id',$id)->orderBy('created_at', 'ASC')->paginate(4);
+        // return view('dashbod_admin', compact('produits'));
+        $categories = Categorie::all();
+        return view('dashbod_admin',compact('produits','categories'));
+        
+    }  
 
 }

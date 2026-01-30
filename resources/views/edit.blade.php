@@ -288,9 +288,9 @@
                     Category <span class="required">*</span>
                 </label>
                 <select id="categorie_id" name="categorie_id"   required>
-                    <option value="1">plantes</option>
-                    <option value="2">outils</option>
-                    <option value="3">graines</option>
+                    @foreach($categories as $categorie)
+                    <option value="{{$categorie->id}}">{{$categorie->name}}</option>
+                     @endforeach
                 </select>
             </div>
 

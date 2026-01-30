@@ -64,5 +64,6 @@ Route::post('/produits', [ProduitController::class, 'store'])->name('store');
 Route::get('/edit/{id}', [ProduitController::class, 'edit'])->name('edit');
 
 Route::put('/update/{id}', [ProduitController::class, 'update'])->name('update');
+Route::get('/filter/{id}', [ProduitController::class, 'filter'])->name('filter');
 
 
