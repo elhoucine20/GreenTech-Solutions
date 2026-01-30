@@ -11,7 +11,12 @@ class ProduitController extends Controller
     //
     public function index()
     {
-        $produits = Produit::orderBy('created_at', 'ASC')->paginate(4);
+      $name = $_GET['query']??'';
+
+
+        $produits = Produit::where('name','LIKE','%'.$name.'%')->orderBy('created_at', 'ASC')->paginate(4);
+
+
         return view('dashbod_admin', compact('produits'));
     }
 

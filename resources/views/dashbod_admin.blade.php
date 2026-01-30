@@ -66,18 +66,38 @@
             <div class="flex flex-col lg:flex-row items-stretch lg:items-center gap-4">
                 
                 <!-- Search -->
-                <div class="flex-1">
-                    <div class="relative">
-                        <svg class="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-leaf-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                        </svg>
-                        <input 
-                            type="text" 
-                            placeholder="Search plants, seeds, tools..." 
-                            class="w-full pl-12 pr-4 py-3 rounded-2xl border-2 border-leaf-200 focus:border-leaf-500 focus:ring-4 focus:ring-leaf-100 transition-all duration-200 outline-none bg-white/80 backdrop-blur-sm text-leaf-900 placeholder-earth-400"
-                        >
-                    </div>
-                </div>
+<!-- Search -->
+<div class="flex-1">
+    <div class="relative">
+        <svg class="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-leaf-500"
+             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+
+        <form action="{{ route('index') }}" method="GET" class="flex gap-2">
+            @csrf
+            @method('get')
+            <input
+                type="text"
+                name="query"
+                placeholder="Search plants, seeds, tools..."
+                class="w-full pl-12 pr-4 py-3 rounded-2xl border-2 border-leaf-200
+                       focus:border-leaf-500 focus:ring-4 focus:ring-leaf-100
+                       transition-all duration-200 outline-none bg-white/80
+                       backdrop-blur-sm text-leaf-900 placeholder-earth-400"
+            >
+
+            <button
+                type="submit"
+                class="px-5 py-3 rounded-2xl bg-leaf-500 text-white font-semibold
+                       hover:bg-leaf-600 transition">
+                Search
+            </button>
+        </form>
+    </div>
+</div>
+
 
                 <!-- Category Filter -->
                 <div class="lg:w-64">
