@@ -11,10 +11,8 @@ class ProduitController extends Controller
     //
     public function index()
     {
-        $produits = Produit::orderBy('created_at', 'ASC')->get();
-        // $produits = Produit::paginate(4);
+        $produits = Produit::orderBy('created_at', 'ASC')->paginate(4);
         return view('dashbod_admin', compact('produits'));
-        // require_once 'resources/views/dashbod_admin.blade.php';
     }
 
 
@@ -22,11 +20,13 @@ class ProduitController extends Controller
     {
         return view('create');
     }
+
     public function destroy($id)
     {
         Produit::destroy($id);
-        $produits = Produit::all();
-        return view('dashbod_admin', compact('produits'));
+        // $produits = Produit::all();
+        // return view('dashbod_admin', compact('produits'));
+        return $this->index();
     }
 
 
@@ -40,8 +40,8 @@ class ProduitController extends Controller
             'categorie_id' => $request->categorie_id,
         ]);
 
-        $produits = Produit::all();
-        return view('dashbod_admin', compact('produits'));
+         return $this->index();
+
     }
 
 
@@ -71,8 +71,8 @@ class ProduitController extends Controller
               'categorie_id' => $request->categorie_id,
           ]);
       
-             $produits = Produit::orderBy('created_at', 'ASC')->get();
-        return view('dashbod_admin', compact('produits'));
+           return $this->index();
+
     }
-    
+
 }

@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plant Catalog Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -162,22 +167,28 @@
                     <div class="grid grid-cols-3 gap-2">
                         
                         <!-- View Button -->
-                        <a href="show/{{$produit->id}}" class="px-3 py-2.5 bg-gradient-to-br from-earth-100 to-earth-200 hover:from-earth-200 hover:to-earth-300 text-earth-800 text-sm font-semibold rounded-xl transition-all duration-300 hover:shadow-md flex items-center justify-center">
+                        <button type="button"
+                                  class="btn btn-info btn-sm"
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#produitModal{{ $produit->id }}" 
+                              
+
+                         class="px-3 py-2.5 bg-gradient-to-br from-earth-100 to-earth-200 hover:from-earth-200 hover:to-earth-300 text-earth-800 text-sm font-semibold rounded-xl transition-all duration-300 hover:shadow-md flex items-center justify-center">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                             </svg>
-                       </a>
+                       </button>
 
                         <!-- Edit Button -->
-                        <a href="edit/{{$produit->id}}" class="px-3 py-2.5 bg-gradient-to-br from-leaf-500 to-leaf-600 hover:from-leaf-600 hover:to-leaf-700 text-white text-sm font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-leaf-500/40 flex items-center justify-center">
+                        <a href="/edit/{{$produit->id}}" class="px-3 py-2.5 bg-gradient-to-br from-leaf-500 to-leaf-600 hover:from-leaf-600 hover:to-leaf-700 text-white text-sm font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-leaf-500/40 flex items-center justify-center">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                             </svg>
                         </a>
 
                         <!-- Delete Button -->
-                        <a href="delete/{{$produit->id}}" class="px-3 py-2.5 bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white text-sm font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-red-500/40 flex items-center justify-center">
+                        <a href="/delete/{{$produit->id}}" class="px-3 py-2.5 bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white text-sm font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-red-500/40 flex items-center justify-center">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                             </svg>
@@ -187,84 +198,53 @@
                 </div>
             </div>
             @endforeach
+        </div>
+    </div>
+    {{$produits->links()}}
 
 
 
-            <!-- Product Card 8 - Sunflower Seeds -->
-            <div class="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden group hover:-translate-y-2">
-                
-                <!-- Image Container -->
-                <div class="relative overflow-hidden bg-gradient-to-br from-leaf-50 to-earth-50 h-64">
-                    <img 
-                        src="https://images.unsplash.com/photo-1597848212624-e530bb7441bc?w=500&h=400&fit=crop" 
-                        alt="Sunflower Seeds" 
-                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    >
-                    
-                    <!-- Stock Badge -->
-                    <div class="absolute top-4 right-4">
-                        <span class="px-4 py-1.5 bg-leaf-500/95 backdrop-blur-md text-white text-xs font-bold rounded-full shadow-lg flex items-center gap-1.5">
-                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                            </svg>
-                            Available
-                        </span>
+    <div class="modal fade" id="produitModal{{ $produit->id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Produit Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <strong>Name:</strong>
+                        <p>{{ $produit->name }}</p>
                     </div>
 
-                    <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent"></div>
-                </div>
-
-                <!-- Card Content -->
-                <div class="p-5">
-                    
-                    <!-- Category Badge -->
-                    <div class="mb-3">
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-gradient-to-r from-green-100 to-green-200 text-green-800 text-xs font-bold rounded-full">
-                            🌱 Seeds
-                        </span>
+                    <div class="col-md-6 mb-3">
+                        <strong>Price:</strong>
+                        <p>{{ $produit->prix }} MAD</p>
                     </div>
 
-                    <!-- Product Name -->
-                    <h3 class="text-xl font-bold text-leaf-900 mb-3 line-clamp-2 group-hover:text-leaf-700 transition-colors duration-300">
-                        Giant Sunflower Seeds
-                    </h3>
-
-                    <!-- Price -->
-                    <div class="mb-5">
-                        <span class="text-3xl font-bold text-earth-800">
-                            $6.99
-                        </span>
+                    <div class="col-12 mb-3">
+                        <strong>Description:</strong>
+                        <p>{{ $produit->description }}</p>
                     </div>
 
-                    <!-- Actions -->
-                    <div class="grid grid-cols-3 gap-2">
-                        
-                        <button class="px-3 py-2.5 bg-gradient-to-br from-earth-100 to-earth-200 hover:from-earth-200 hover:to-earth-300 text-earth-800 text-sm font-semibold rounded-xl transition-all duration-300 hover:shadow-md flex items-center justify-center">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                            </svg>
-                        </button>
-
-                        <button class="px-3 py-2.5 bg-gradient-to-br from-leaf-500 to-leaf-600 hover:from-leaf-600 hover:to-leaf-700 text-white text-sm font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-leaf-500/40 flex items-center justify-center">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                            </svg>
-                        </button>
-
-                        <button class="px-3 py-2.5 bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white text-sm font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-red-500/40 flex items-center justify-center">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                            </svg>
-                        </button>
-
+                    <div class="col-12">
+                        <strong>Category:</strong>
+                        <p>{{ $produit->categorie->name ?? '—' }}</p>
                     </div>
                 </div>
             </div>
 
-        </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
 
+        </div>
     </div>
+</div>
+
 
 </body>
 </html>
