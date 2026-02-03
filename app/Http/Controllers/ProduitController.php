@@ -13,10 +13,9 @@ class ProduitController extends Controller
     public function index()
     {
         $categories = Categorie::all();
-
-      $name = $_GET['query']??'';
-        $produits = Produit::with('categorie')->where('name','LIKE','%'.$name.'%')->orderBy('created_at', 'ASC')->paginate(4);
-        return view('dashbod_admin', compact('produits','categories'));
+        $name = $_GET['query'] ?? '';
+        $produits = Produit::with('categorie')->where('name', 'LIKE', '%' . $name . '%')->orderBy('created_at', 'ASC')->paginate(4);
+        return view('dashbod_admin', compact('produits', 'categories'));
     }
 
 
@@ -24,7 +23,7 @@ class ProduitController extends Controller
     {
         $categories = Categorie::all();
 
-        return view('create',compact('categories'));
+        return view('create', compact('categories'));
     }
 
     public function destroy($id)
@@ -39,6 +38,14 @@ class ProduitController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
+
+        $request->validate([
+            'name' => 'required|between:3,30',
+            'prix' => 'required|integer',
+            'description' => 'required|string',
+            'categorie_id' => 'required|int',
+        ]);
+
         Produit::create([
             'name' => $request->name,
             'prix' => $request->prix,
@@ -46,50 +53,55 @@ class ProduitController extends Controller
             'categorie_id' => $request->categorie_id,
         ]);
 
-         return $this->index();
-
+        return $this->index();
     }
-
 
 
     public function show()
     {
         // description (details)
-
+        return view('dashbod_admin');
     }
 
-    public function edit($id) {
-       $produit = Produit::find($id);
+    public function edit($id)
+    {
+        $produit = Produit::find($id);
         $categories = Categorie::all();
 
-        return view('edit',compact('produit','categories'));
+        return view('edit', compact('produit', 'categories'));
         // dump($produit);
     }
 
-    public function update(Request $request,$id) {
+    public function update(Request $request, $id)
+    {
         //   dd($request->all());
-      
-      
-          $produit = Produit::findOrFail($id);
-      
-          $produit->update([
-              'name' => $request->name,
-              'prix' => $request->prix,
-              'description' => $request->description,
-              'categorie_id' => $request->categorie_id,
-          ]);
-      
-           return $this->index();
+
+
+        $produit = Produit::findOrFail($id);
+
+        $produit->update([
+            'name' => $request->name,
+            'prix' => $request->prix,
+            'description' => $request->description,
+            'categorie_id' => $request->categorie_id,
+        ]);
+
+        return $this->index();
     }
 
 
-    public function filter($id){
-      
-             $produits = Produit::with('categorie')->where('categorie_id',$id)->orderBy('created_at', 'ASC')->paginate(4);
+    public function filter($id)
+    {
+        $produits = Produit::with('categorie')->where('categorie_id', $id)->orderBy('created_at', 'ASC')->paginate(4);
         // return view('dashbod_admin', compact('produits'));
         $categories = Categorie::all();
-        return view('dashbod_admin',compact('produits','categories'));
-        
-    }  
-
+        return view('dashbod_admin', compact('produits', 'categories'));
+    }
 }
+// preparer un petch
+
+
+
+
+
+

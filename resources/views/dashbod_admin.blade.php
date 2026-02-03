@@ -8,9 +8,85 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
+<style>
+    /* Minimal Modern Design */
+    .modal-content {
+        border: none;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    }
+    
+    .modal-header {
+        background-color: #1a202c;
+        color: white;
+        padding: 28px 32px;
+        border-bottom: none;
+        border-radius: 20px 20px 0 0;
+    }
+    
+    .modal-title {
+        font-size: 26px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+    }
+    
+    .btn-close {
+        filter: brightness(0) invert(1);
+    }
+    
+    .modal-body {
+        padding: 32px;
+    }
+    
+    .modal-body strong {
+        display: inline-block;
+        color: #718096;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        margin-bottom: 6px;
+        font-weight: 600;
+    }
+    
+    .modal-body p {
+        color: #1a202c;
+        font-size: 17px;
+        margin: 0;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .modal-body .col-12:last-child p {
+        border-bottom: none;
+    }
+    
+    .modal-body .col-md-6:nth-child(2) p {
+        color: #38a169;
+        font-size: 24px;
+        font-weight: 700;
+    }
+    
+    .modal-footer {
+        border-top: none;
+        padding: 0 32px 32px;
+    }
+    
+    .btn-secondary {
+        background-color: #1a202c;
+        border: none;
+        padding: 12px 32px;
+        border-radius: 10px;
+        font-weight: 600;
+        transition: all 0.3s;
+    }
+    
+    .btn-secondary:hover {
+        background-color: #2d3748;
+        transform: translateY(-1px);
+    }
+</style>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
+    
     <script>
         tailwind.config = {
             theme: {
@@ -214,13 +290,6 @@
                     </div>
                 </div>
             </div>
-            @endforeach
-        </div>
-    </div>
-    {{$produits->links()}}
-
-
-
     <div class="modal fade" id="produitModal{{ $produit->id }}" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
@@ -261,6 +330,14 @@
             </div>
         </div>
     </div>
+
+            @endforeach
+        </div>
+    </div>
+    {{$produits->links()}}
+
+
+
 
 
 </body>

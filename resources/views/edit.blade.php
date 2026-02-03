@@ -295,7 +295,10 @@
             </div>
 
             <div class="button-group">
-                <button type="button" class="btn-secondary" >Cancel</button>
+                <a href="/dashbord">
+
+                    <button type="button" class="btn-secondary" >Cancel</button>
+                </a>
                 <button type="submit" name="submit" class="btn-primary">Update Product</button>
             </div>
         </form>

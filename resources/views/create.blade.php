@@ -195,6 +195,11 @@
                     placeholder="Enter product name"
                     required
                 >
+                @error('name')
+                <div style="color: #e74c3c;">{{$message}}
+                </div>
+                    
+                @enderror
             </div>
 
             <div class="form-group">
@@ -210,6 +215,7 @@
                     min="0"
                     required
                 >
+                
                 <div class="helper-text">Enter the price in your currency</div>
             </div>
 
@@ -223,9 +229,14 @@
                     placeholder="Enter product description"
                     required
                 ></textarea>
+                                @error('description')
+                <div style="color: #e74c3c;">{{$message}}
+                </div>
+                    
+                @enderror
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="image">
                     Product Image <span class="required">*</span>
                 </label>
@@ -239,7 +250,7 @@
                 <div class="image-preview" id="imagePreview">
                     <img id="previewImg" src="" alt="Preview">
                 </div>
-            </div>
+            </div> -->
 
             <div class="form-group">
                 <label for="categorie_id">
@@ -254,7 +265,11 @@
             </div>
 
             <div class="button-group">
-                <button type="reset" class="btn-secondary" onclick="resetForm()">Cancel</button>
+                <a href="/dashbord">
+
+                    <button  type="button" class="btn-secondary">Cancel</button>
+                </a>
+
                 <button type="submit" name="submit" class="btn-primary">Create Product</button>
             </div>
         </form>

@@ -1,0 +1,19 @@
+<?php
+namespace App\Http\Services;
+
+
+class Validate{
+
+
+     public static function Valider($request){
+      
+       $request->validate([
+           'name' => 'required|string|between:3,30',
+           'email' => 'required|string',
+           'password' => 'required|string',
+           'role'=>'required|string',
+           'confirmPassword'=>'required|string'
+       ]);
+      }
+}
+?>

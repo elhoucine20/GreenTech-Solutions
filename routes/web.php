@@ -16,6 +16,7 @@ CENNECT:
 OPTIONS: 
 */
 use App\Http\Controllers\ProduitController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CategorieController;
 
 
@@ -28,9 +29,9 @@ Route::get('/hi', function(){
 // });
 
 
-Route::get('/dashbordd', function(){
- return View('admin_dashbord');
-});
+// Route::get('/dashbordd', function(){
+//  return View('admin_dashbord');
+// });
 // Route::get('/create', function(){
 //  return View('create');
 // });
@@ -64,6 +65,19 @@ Route::post('/produits', [ProduitController::class, 'store'])->name('store');
 Route::get('/edit/{id}', [ProduitController::class, 'edit'])->name('edit');
 
 Route::put('/update/{id}', [ProduitController::class, 'update'])->name('update');
+
 Route::get('/filter/{id}', [ProduitController::class, 'filter'])->name('filter');
+
+// phase 2
+
+Route::post('/login', [LoginController::class, 'login'])->name('login');
+
+Route::get('/inscription', [LoginController::class, 'inscrire'])->name('inscrire');
+
+Route::post('/toLogin', [LoginController::class, 'toLogin'])->name('toLogin');
+
+// Route::get('/login', [LoginController::class, 'login'])->name('login');
+
+
 
 
