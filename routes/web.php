@@ -18,55 +18,31 @@ OPTIONS:
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CategorieController;
-
+use App\Http\Middleware\userMiddleware;
 
 Route::get('/hi', function(){
  return View('today');
  });
  
-// Route::get('/dashbord', function(){
-//  return View('dashbod_admin');
-// });
-
-
-// Route::get('/dashbordd', function(){
-//  return View('admin_dashbord');
-// });
-// Route::get('/create', function(){
-//  return View('create');
-// });
-// Route::get('/edit', function(){
-//  return View('update');
-// });
-// Route::get('/delete', function(){
-//  return View('');
-// });
-// Route::get('/show', function(){
-//  return View('showProduct');
-// });
-// Route::get('/login', function(){
-//  return View('login');
-// });
-// Route::get('/home', function(){
-//  return View('home');
-// });
-
 
 // Route::get('/dashbord', [CategorieController::class, 'index']);
+Route::controller(ProduitController::class)->middleware(userMiddleware::class)->group(function(){
 
-Route::get('/dashbord', [ProduitController::class, 'index'])->name('index');
+    Route::get('/dashbord', 'index')->name('index');
+    
+    Route::get('/delete/{id}', 'destroy');
+    
+    Route::get('/create',  'create')->name('produits.create');
+    
+    Route::post('/dashbord', 'store')->name('store');
+    
+    Route::get('/edit/{id}', 'edit')->name('edit');
+    
+    Route::put('/update/{id}', 'update')->name('update');
+    
+    Route::get('/filter/{id}', 'filter')->name('filter');
 
-Route::get('/delete/{id}', [ProduitController::class, 'destroy']);
-
-Route::get('/create', [ProduitController::class, 'create'])->name('produits.create');
-
-Route::post('/produits', [ProduitController::class, 'store'])->name('store');
-
-Route::get('/edit/{id}', [ProduitController::class, 'edit'])->name('edit');
-
-Route::put('/update/{id}', [ProduitController::class, 'update'])->name('update');
-
-Route::get('/filter/{id}', [ProduitController::class, 'filter'])->name('filter');
+});
 
 // phase 2
 
@@ -76,7 +52,7 @@ Route::get('/inscription', [LoginController::class, 'inscrire'])->name('inscrire
 
 Route::post('/toLogin', [LoginController::class, 'toLogin'])->name('toLogin');
 
-// Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::get('/showlogin', [LoginController::class, 'index']);
 
 
 

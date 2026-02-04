@@ -12,9 +12,9 @@ use Mockery\Generator\StringManipulation\Pass\Pass;
 class LoginController extends Controller
 {
     //
-    // public function index(){
-    //     // return View('authentification/login');
-    //     }
+    public function index(){
+        return View('authentification/login');
+        }
             public function toLogin(Request $request){
                 if ($request) {
                     $pass1 = $request->confirmPassword;
@@ -28,7 +28,7 @@ class LoginController extends Controller
                         'name'=>$request->name,
                         'email'=>$request->email,
                         'password'=>$request->password,
-                        // 'role'=>$request->role,
+                        'role'=>'client',
                         ]);
                     return view('authentification/login');
                     }else{
@@ -41,20 +41,30 @@ class LoginController extends Controller
 
             
             public function login(Request $request){
-                // $pass = $request->password;
-                // $email = $request->email;
-                // $credentials = ['email'=>$email,'password'=>$pass];
-                // dd(Auth::attempt($credentials));
-                dd($request->post());
-                // if (Auth::attempt($credentials)) {
-                //     # code...
-                //     $request->session()->regenerate();
-                //  return to_route('home');
+                $pass = $request->password;
+                
+                $email = $request->email;
+                $credentials = ['email'=>$email,'password'=>$pass];
+                Auth::attempt($credentials);
+                // dd($request->post());
+                if (Auth::attempt($credentials)){
+                    if (Auth::user()->role=="admin") {
+                        $request->session()->regenerate();
+                         return to_route('index');                     
+                         
+                         }else{
+                        $request->session()->regenerate();
+                        // return to_route('404');
+                        var_dump("maendkch lh9");
+                        
 
-                // }else{
-                //     return back()->withErrors(['email'=>'email ou password incorrecgt'])->onlyInput('email');
-                // }
-
+                    }
+                    
+                    }else{
+                            return back()->withErrors(['email'=>'email ou password incorrecgt'])->onlyInput('email');
+                        }
+                        
+                        return view('authentification/login');
         }
         
         

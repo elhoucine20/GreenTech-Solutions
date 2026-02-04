@@ -349,7 +349,7 @@
                 <div class="error-text" id="emailError">Please enter a valid email address.</div>
             </div>
                         <!-- role -->
-<div class="form-group">
+<!-- <div class="form-group">
     <label for="role">Role <span class="required">*</span></label>
     <div class="input-wrapper">
         <select name="role" id="role" required
@@ -358,7 +358,7 @@
             <option value="admin">Admin</option>
         </select>
     </div>
-</div>
+</div> -->
 
             <!--  -->
 
@@ -413,7 +413,7 @@
             <div class="divider"><span>or</span></div>
 
             <div class="login-link">
-                Already have an account? <a href="/login">Sign In</a>
+                Already have an account? <a href="/showlogin">Sign In</a>
             </div>
         </form>
     </div>

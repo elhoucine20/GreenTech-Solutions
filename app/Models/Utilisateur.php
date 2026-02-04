@@ -18,4 +18,13 @@ protected $fillable = [
     public function favorite(){
         return $this->hasMany(Favorite::class);
     }
+
+
+        protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
 }

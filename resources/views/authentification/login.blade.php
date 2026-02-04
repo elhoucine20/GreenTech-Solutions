@@ -279,7 +279,7 @@
             </div>
 
                                     <!-- role -->
-<div class="form-group">
+<!-- <div class="form-group">
     <label for="role">Role <span class="required">*</span></label>
     <div class="input-wrapper">
         <select name="role" id="role" required
@@ -288,7 +288,7 @@
             <option value="admin">Admin</option>
         </select>
     </div>
-</div>
+</div> -->
 
             <!--  -->
 

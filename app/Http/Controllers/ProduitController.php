@@ -37,22 +37,17 @@ class ProduitController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
-
+        
         $request->validate([
             'name' => 'required|between:3,30',
             'prix' => 'required|integer',
             'description' => 'required|string',
             'categorie_id' => 'required|int',
-        ]);
-
-        Produit::create([
-            'name' => $request->name,
-            'prix' => $request->prix,
-            'description' => $request->description,
-            'categorie_id' => $request->categorie_id,
-        ]);
-
+            ]);
+            
+            Produit::create($request->all());
+            
+            // dd($request->all());
         return $this->index();
     }
 
