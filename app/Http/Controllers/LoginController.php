@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Services\Validate;
 use Illuminate\Http\Request;
 use App\Models\Utilisateur;
-
 use Illuminate\Support\Facades\Auth;
 use Mockery\Generator\StringManipulation\Pass\Pass;
 
@@ -55,7 +54,8 @@ class LoginController extends Controller
                          }else{
                         $request->session()->regenerate();
                         // return to_route('404');
-                        var_dump("maendkch lh9");
+                         return to_route('client_dashbord');                     
+
                         
 
                     }
@@ -73,6 +73,13 @@ class LoginController extends Controller
             public function inscrire(){
             
             return View('authentification/inscrire');
+            }
+
+
+
+            public function Logout(){
+                Auth::logout();
+                return view('authentification/login');
             }
 
 }

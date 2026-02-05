@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class userMiddleware
+class clientMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,7 @@ class userMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $user = Auth::user();
-        if ( Auth::check() && $user->role=='admin') {
+        if( Auth::check() && $user->role=='client') {
             # code...
             return $next($request);
         }else{
