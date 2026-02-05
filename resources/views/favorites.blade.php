@@ -4,14 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GreenShop - Buy Beautiful Plants Online</title>
+    <title>My Favorites - GreenShop</title>
     <script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" integrity="sha512-F636MAkMAhtTplahL9F6KmTfxTmYcAcjcCkyu0f0voT3N/6vzAuJ4Num55a0gEJ+hRLHhdz3vDvZpf6kqgEa5w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap-toggle.css" integrity="sha512-9tISBnhZjiw7MV4a1gbemtB9tmPcoJ7ahj8QWIc0daBCdvlKjEA48oLlo6zALYm3037tPYYulT0YQyJIJJoyMQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> -->
-
     
     <script>
         tailwind.config = {
@@ -49,12 +43,20 @@
     </script>
     
     <style>
-        .product-card {
+        .favorite-card {
             transition: all 0.3s ease;
         }
         
-        .product-card:hover {
-            transform: translateY(-8px);
+        .favorite-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .remove-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .remove-btn:hover {
+            transform: scale(1.1);
         }
         
         .add-to-cart-btn {
@@ -64,7 +66,16 @@
         .add-to-cart-btn:hover {
             transform: scale(1.05);
         }
-        
+
+        .empty-state {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
@@ -72,6 +83,15 @@
         
         .float-animation {
             animation: float 3s ease-in-out infinite;
+        }
+
+        .heart-pulse {
+            animation: heartPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
     </style>
 </head>
@@ -104,23 +124,10 @@
                 <!-- Search Bar (Desktop) -->
                 <div class="hidden md:flex flex-1 max-w-xl mx-8">
                     <div class="relative w-full">
-                        <form style="display: flex;gap:10px;" action="{{ route('client_dashbord') }}" method="GET" >
-                            @csrf
-                            @method('get')
-                        
-                            <input 
+                        <input 
                             type="text" 
-                            name="query"
                             placeholder="Search for plants, seeds, tools..." 
                             class="w-full px-5 py-3 pl-12 rounded-2xl border-2 border-leaf-200 focus:border-leaf-500 focus:ring-4 focus:ring-leaf-100 transition-all duration-200 outline-none">
-                            
-                                  <button
-                                type="submit"
-                                class="px-5 py-2 rounded-2xl bg-leaf-500 text-white font-semibold hover:bg-leaf-600 transition">
-                                Search
-                            </button>
-
-                       </form>   
                         <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-earth-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
@@ -129,14 +136,14 @@
                 
                 <!-- Right Menu -->
                 <div class="flex items-center gap-4">
-                    <!-- Wishlist -->
-                    <a href="favories" class="relative p-3 hover:bg-leaf-50 rounded-xl transition group">
-                        <svg class="w-6 h-6 text-earth-700 group-hover:text-leaf-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    <!-- Back to Shop -->
+                    <a href="client-dashboard.html" class="hidden sm:flex items-center gap-2 px-5 py-3 bg-earth-100 hover:bg-earth-200 text-earth-800 rounded-xl transition font-semibold">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                         </svg>
-                        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">2</span>
+                        Back to Shop
                     </a>
-                    
+
                     <!-- Shopping Cart -->
                     <a href="#" class="relative p-3 hover:bg-leaf-50 rounded-xl transition group">
                         <svg class="w-6 h-6 text-earth-700 group-hover:text-leaf-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -146,7 +153,7 @@
                     </a>
                     
                     <!-- User Account -->
-                      <a href="/Logout" class="hidden sm:flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-xl transition shadow-lg shadow-red-500/30 font-semibold">
+                    <a href="#" class="hidden sm:flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-xl transition shadow-lg shadow-red-500/30 font-semibold">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                         </svg>
@@ -157,39 +164,61 @@
         </div>
     </nav>
 
-    <!-- Categories Bar -->
-    <div class="bg-white border-b border-leaf-100 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center gap-6 py-4 overflow-x-auto">
-
-                <!-- <a href="#all" class="whitespace-nowrap px-5 py-2 bg-leaf-500 text-white font-semibold rounded-xl hover:bg-leaf-600 transition">
-                    All Products
-                </a> -->
-        
-                @foreach($categories as $categorie)
-                <a href="/filtrage/{{$categorie->id}}" class="whitespace-nowrap px-5 py-2 bg-earth-100 text-earth-800 font-semibold rounded-xl hover:bg-earth-200 transition">
-                    🌳{{$categorie->name}}
-                </a>
-                @endforeach
-            </div>
-        </div>
-    </div>
-
     <!-- Main Content -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
         <!-- Page Header -->
-        <div class="mb-8">
-            <h2 class="text-3xl font-bold text-leaf-900 mb-2">Our Plant Collection</h2>
-            <p class="text-earth-600">Browse our selection of beautiful plants for your home and garden</p>
+        <div class="mb-8 flex items-center justify-between">
+            <div>
+                <div class="flex items-center gap-3 mb-2">
+                    <svg class="w-8 h-8 text-red-500 heart-pulse" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                    <h2 class="text-3xl font-bold text-leaf-900">My Favorite Plants</h2>
+                </div>
+                <p class="text-earth-600">Your personal collection of beloved plants</p>
+            </div>
+            <div class="text-right">
+                <p class="text-sm text-earth-600">Total Items</p>
+                <p class="text-3xl font-bold text-leaf-700">8</p>
+            </div>
         </div>
 
-        <!-- Products Grid -->
+        <!-- Action Bar -->
+        <div class="mb-6 flex flex-wrap items-center justify-between gap-4 bg-white p-4 rounded-2xl shadow-sm border border-leaf-100">
+            <div class="flex gap-3">
+                <button class="px-4 py-2 bg-leaf-500 text-white font-semibold rounded-xl hover:bg-leaf-600 transition">
+                    All (8)
+                </button>
+                <button class="px-4 py-2 bg-earth-100 text-earth-800 font-semibold rounded-xl hover:bg-earth-200 transition">
+                    In Stock (6)
+                </button>
+                <button class="px-4 py-2 bg-earth-100 text-earth-800 font-semibold rounded-xl hover:bg-earth-200 transition">
+                    Out of Stock (2)
+                </button>
+            </div>
+            <div class="flex gap-3">
+                <button class="px-4 py-2 bg-leaf-100 text-leaf-700 font-semibold rounded-xl hover:bg-leaf-200 transition flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    Add All to Cart
+                </button>
+                <button class="px-4 py-2 bg-red-100 text-red-700 font-semibold rounded-xl hover:bg-red-200 transition flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                    Clear All
+                </button>
+            </div>
+        </div>
+
+        <!-- Favorites Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 
-            <!-- Product Card 1 -->
-            @foreach($produits as $produit)
-
+            <!-- Favorite Card 1 -->
+             @foreach($produits as $favorite)
+              @if($favorite->produit) 
             <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden border border-leaf-100">
                 <!-- Image -->
                 <div class="relative h-64 bg-gradient-to-br from-leaf-50 to-earth-50 overflow-hidden group">
@@ -198,17 +227,13 @@
                          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     
                     <!-- Wishlist Button -->
-                    <form method="POST" action="{{ route('Myfavori',$produit->id) }}">
-                     @csrf 
-                     @method('PUT')
+              
                       
                          <button type="submit"  class=" toggle-class   absolute top-3 right-3 p-2.5 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-leaf-500 hover:text-white transition-all">
                              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                              </svg>
                          </button>
-                    </form>
-                     <!-- </a> -->
                     
                     <!-- Badge -->
                     <div class="absolute top-3 left-3">
@@ -220,14 +245,14 @@
                 <div class="p-5">
                     <!-- Category -->
                     <div class="mb-2">
-                        <span class="text-xs font-semibold text-leaf-600 uppercase">🌿{{$produit->categorie->name}}</span>
+                       
                     </div>
                     
                     <!-- Title -->
-                    <h3 class="text-lg font-bold text-leaf-900 mb-2">{{$produit->name}}</h3>
+                    <h3 class="text-lg font-bold text-leaf-900 mb-2">{{ $favorite->produit->name }}</h3>
                     
                     <!-- Description -->
-                    <p class="text-sm text-earth-600 mb-3 line-clamp-2">{{$produit->description}}</p>
+                    <p class="text-sm text-earth-600 mb-3 line-clamp-2">{{ $favorite->produit->description }}</p>
                     
                     <!-- Rating -->
                     <div class="flex items-center gap-2 mb-4">
@@ -244,7 +269,7 @@
                     <!-- Price & Button -->
                     <div class="flex items-center justify-between">
                         <div>
-                            <span class="text-2xl font-bold text-earth-800">${{$produit->prix}}</span>
+                            <span class="text-2xl font-bold text-earth-800">${{ $favorite->produit->prix }}</span>
                         </div>
                         <a href="#" class="add-to-cart-btn px-5 py-2.5 bg-gradient-to-r from-leaf-500 to-leaf-600 hover:from-leaf-600 hover:to-leaf-700 text-white font-bold rounded-xl shadow-lg shadow-leaf-500/30 flex items-center gap-2">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -255,95 +280,34 @@
                     </div>
                 </div>
             </div>
+             @endif
             @endforeach
-            
+
         </div>
-        <div class="css">
-            
-            {{$produits->links()}}
-         </div>
 
-<style>
-            .css {
-                  margin: 20px 0;
-              }
-              
-              /* Pagination container */
-              .pagination {
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  gap: 5px;
-                  list-style: none;
-                  padding: 0;
-                  margin: 0;
-              }
-              
-              /* Pagination items */
-              .pagination li {
-                  display: inline-block;
-              }
-              
-              /* Pagination links */
-              .pagination a,
-              .pagination span {
-                  display: inline-block;
-                  padding: 8px 12px;
-                  min-width: 40px;
-                  text-align: center;
-                  text-decoration: none;
-                  color: #333;
-                  background-color: #fff;
-                  border: 1px solid #ddd;
-                  border-radius: 4px;
-                  transition: all 0.3s ease;
-                  font-size: 14px;
-              }
-              
-              /* Hover effect for links */
-              .pagination a:hover {
-                  background-color: #007bff;
-                  color: #fff;
-                  border-color: #007bff;
-              }
-              
-              /* Active page */
-              .pagination .active span {
-                  background-color: #007bff;
-                  color: #fff;
-                  border-color: #007bff;
-                  font-weight: bold;
-              }
-              
-              /* Disabled state (previous/next when not available) */
-              .pagination .disabled span {
-                  color: #6c757d;
-                  background-color: #fff;
-                  border-color: #ddd;
-                  cursor: not-allowed;
-                  opacity: 0.5;
-              }
-              
-              /* Previous and Next buttons */
-              .pagination .page-item:first-child a,
-              .pagination .page-item:last-child a {
-                  font-weight: 500;
-              }
-              
-              /* Remove gap for first and last items */
-              .pagination li:first-child,
-              .pagination li:last-child {
-                  margin: 0;
-              }
-              
-              
-              
-              
-</style>
-        
+        <!-- Empty State (Hidden when there are favorites) -->
+        <!-- Uncomment this section and hide the grid above to show the empty state -->
+        <!--
+        <div class="empty-state text-center py-20">
+            <div class="max-w-md mx-auto">
+                <div class="mb-6">
+                    <svg class="w-32 h-32 mx-auto text-earth-300 float-animation" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-leaf-900 mb-3">No Favorites Yet</h3>
+                <p class="text-earth-600 mb-8">Start adding plants to your wishlist by clicking the heart icon on any product.</p>
+                <a href="client-dashboard.html" class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-leaf-500 to-leaf-600 hover:from-leaf-600 hover:to-leaf-700 text-white font-bold rounded-xl shadow-lg shadow-leaf-500/30 transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    Browse Plants
+                </a>
+            </div>
+        </div>
+        -->
+
     </div>
-    <!-- {{$produits->links()}} -->
-
 
     <!-- Footer -->
     <footer class="bg-gradient-to-br from-leaf-900 via-leaf-800 to-earth-900 text-white mt-20 pt-16 pb-8">
@@ -415,6 +379,35 @@
             </div>
         </div>
     </footer>
+
+    <!-- <script>
+        // Optional: Add interactive functionality
+        document.querySelectorAll('.remove-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const card = this.closest('.favorite-card');
+                card.style.opacity = '0';
+                card.style.transform = 'scale(0.8)';
+                setTimeout(() => {
+                    card.remove();
+                    // Update count if needed
+                }, 300);
+            });
+        });
+
+        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Add to cart logic here
+                this.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Added';
+                this.classList.add('bg-green-600');
+                setTimeout(() => {
+                    this.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg> Add';
+                    this.classList.remove('bg-green-600');
+                }, 2000);
+            });
+        });
+    </script> -->
 
 </body>
 

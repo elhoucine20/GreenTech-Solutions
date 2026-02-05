@@ -30,8 +30,9 @@ protected $fillable = [
     }
 
 
+
         public function favorite():BelongsToMany{
         // return $this->belongsToMany(Favorite::class);
-        return $this->BelongsToMany(Produit::class, 'favorite');
+        return $this->BelongsToMany(Produit::class, 'favorite','utilisateur_id', 'produit_id');
     }
 }

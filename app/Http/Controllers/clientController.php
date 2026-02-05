@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Utilisateur;
 use App\Models\Categorie;
+use App\Models\Favorite;
 use App\Models\Produit;
 // use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
@@ -36,16 +37,16 @@ class clientController extends Controller
       /**
        * @var App\Models\Utilisateur $utilisateur
        */
-
         $utilisateur = Auth::user();
         $utilisateur->favorite()->toggle($produit->id);
-        // $utilisateur->favorite()->toggle($produit->id);
 
-        
-        // dd(Auth::user());
         return to_route('client_dashbord');
     }
 
-
-
+     public function lesFavorites(){
+         $produits = Favorite::where('utilisateur_id', auth()->user()->id)
+                              ->with('produit') 
+                              ->get();
+               return view('favorites', compact('produits'));
+     }
 }

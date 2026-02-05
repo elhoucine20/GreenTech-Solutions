@@ -34,6 +34,7 @@ Route::controller(clientController::class)->middleware(clientMiddleware::class)-
     Route::get('/filtrage/{id}',"filtrage");
 
     Route::put('/Myfavori/{produit}',"CreateFavorite")->name('Myfavori');
+    Route::get('/favories',"lesFavorites")->name('favories');
     
 });
 

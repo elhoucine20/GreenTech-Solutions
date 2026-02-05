@@ -8,15 +8,19 @@ class Favorite extends Model
 {
     //
         protected $table = 'favorite';
-    //          protected $fillable = [
-    //     'utilisateur_id',
-    //     'produit_id',
-    // ];
+             protected $fillable = [
+        'utilisateur_id',
+        'produit_id',
+    ];
 
-    //     public function utilisateur()
-    // {
-    //     return $this->belongsTo(Utilisateur::class, 'utilisateur_id');
-    // }
+        public function produit()
+    {
+        return $this->belongsTo(Produit::class, 'produit_id');
+    }
 
+        public function utilisateur()
+    {
+        return $this->belongsTo(Utilisateur::class, 'utilisateur_id');
+    }
 
 }
