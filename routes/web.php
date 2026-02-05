@@ -51,7 +51,6 @@ Route::controller(ProduitController::class)->middleware(userMiddleware::class)->
 });
 
 // phase 2
-
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/inscription', [LoginController::class, 'inscrire'])->name('inscrire');
 Route::post('/toLogin', [LoginController::class, 'toLogin'])->name('toLogin');
