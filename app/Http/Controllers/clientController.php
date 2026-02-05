@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Utilisateur;
 use App\Models\Categorie;
 use App\Models\Produit;
+// use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class clientController extends Controller
@@ -28,4 +30,22 @@ class clientController extends Controller
         $categories = Categorie::all();
         return view('dashbord_client', compact('produits', 'categories'));
     }
+
+    public function CreateFavorite(Produit $produit){
+
+      /**
+       * @var App\Models\Utilisateur $utilisateur
+       */
+
+        $utilisateur = Auth::user();
+        $utilisateur->favorite()->toggle($produit->id);
+        // $utilisateur->favorite()->toggle($produit->id);
+
+        
+        // dd(Auth::user());
+        return to_route('client_dashbord');
+    }
+
+
+
 }

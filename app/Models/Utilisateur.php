@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Utilisateur extends Model
+class Utilisateur extends Authenticatable
 {
-
+protected $table = 'utilisateurs';
 
 protected $fillable = [
     'name',
@@ -15,9 +17,8 @@ protected $fillable = [
     'password'
 ];
     //
-    public function favorite(){
-        return $this->hasMany(Favorite::class);
-    }
+
+
 
 
         protected function casts(): array
@@ -26,5 +27,11 @@ protected $fillable = [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+
+        public function favorite():BelongsToMany{
+        // return $this->belongsToMany(Favorite::class);
+        return $this->BelongsToMany(Produit::class, 'favorite');
     }
 }

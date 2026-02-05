@@ -32,6 +32,9 @@ Route::controller(clientController::class)->middleware(clientMiddleware::class)-
 
     Route::get('/client_dashbord',"index")->name('client_dashbord');
     Route::get('/filtrage/{id}',"filtrage");
+
+    Route::put('/Myfavori/{produit}',"CreateFavorite")->name('Myfavori');
+    
 });
 
 // Logout

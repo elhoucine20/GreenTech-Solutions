@@ -125,15 +125,17 @@
 </head>
 
 <body class="bg-gradient-to-br from-leaf-50 via-white to-earth-50 min-h-screen">
-
+    
     <!-- Header -->
     <div class="bg-white/90 backdrop-blur-lg border-b border-leaf-200 shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <h2 class="text-3xl font-bold text-leaf-900 flex items-center gap-3">Hello {{$username}}</h2>
 
             <!-- Title -->
             <div style="display: flex;justify-content:space-between"  class="mb-6">
                 <div>
-
+                    <!-- <div style="display: flex; justify-content:space-between"> -->
+           
                 
                     <h1 class="text-3xl font-bold text-leaf-900 flex items-center gap-3">
                         <svg class="w-10 h-10 text-leaf-600" fill="currentColor" viewBox="0 0 20 20">
@@ -141,18 +143,23 @@
                         </svg>
                         Plant Catalog Dashboard
                     </h1>
+                  
+                
+                <!-- </div> -->
                     <p class="text-earth-600 mt-1">Manage your botanical inventory</p>
                 </div>
 
                 <!-- User Account -->
                  <div>
+                   <form action="{{route('Logout'}}">
 
-                     <a href="/Logout" class="hidden sm:flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-xl transition shadow-lg shadow-red-500/30 font-semibold">
-         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                </svg>
-      Logout
-  </a>
+                   </form>
+                     <button type="submit" class="hidden sm:flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-xl transition shadow-lg shadow-red-500/30 font-semibold">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                   </svg>
+                         Logout
+                     </button>
                  </div>
             </div>
 

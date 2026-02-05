@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GreenShop - Buy Beautiful Plants Online</title>
     <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" integrity="sha512-F636MAkMAhtTplahL9F6KmTfxTmYcAcjcCkyu0f0voT3N/6vzAuJ4Num55a0gEJ+hRLHhdz3vDvZpf6kqgEa5w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap-toggle.css" integrity="sha512-9tISBnhZjiw7MV4a1gbemtB9tmPcoJ7ahj8QWIc0daBCdvlKjEA48oLlo6zALYm3037tPYYulT0YQyJIJJoyMQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> -->
@@ -160,20 +162,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center gap-6 py-4 overflow-x-auto">
 
-
-                <!-- @foreach($categories as $categorie)
-                <a href="/filter/{{$categorie->id}}">
-                    <button type="submit" class="px-5 py-2 rounded-2xl bg-leaf-500 text-white font-semibold hover:bg-leaf-600 transition">{{$categorie->name}}</button>
-                    
-                </a>
-                @endforeach -->
-                
-                
-                <a href="#all" class="whitespace-nowrap px-5 py-2 bg-leaf-500 text-white font-semibold rounded-xl hover:bg-leaf-600 transition">
+                <!-- <a href="#all" class="whitespace-nowrap px-5 py-2 bg-leaf-500 text-white font-semibold rounded-xl hover:bg-leaf-600 transition">
                     All Products
-                </a>
-                
-                
+                </a> -->
+        
                 @foreach($categories as $categorie)
                 <a href="/filtrage/{{$categorie->id}}" class="whitespace-nowrap px-5 py-2 bg-earth-100 text-earth-800 font-semibold rounded-xl hover:bg-earth-200 transition">
                     🌳{{$categorie->name}}
@@ -206,11 +198,17 @@
                          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     
                     <!-- Wishlist Button -->
-                    <button class="absolute top-3 right-3 p-2.5 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-leaf-500 hover:text-white transition-all">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                        </svg>
-                    </button>
+                    <form method="POST" action="{{ route('Myfavori',$produit->id) }}">
+                     @csrf 
+                     @method('PUT')
+                      
+                         <button type="submit"  class=" toggle-class   absolute top-3 right-3 p-2.5 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-leaf-500 hover:text-white transition-all">
+                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                             </svg>
+                         </button>
+                    </form>
+                     <!-- </a> -->
                     
                     <!-- Badge -->
                     <div class="absolute top-3 left-3">

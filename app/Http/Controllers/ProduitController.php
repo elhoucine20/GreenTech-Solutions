@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categorie;
 use Illuminate\Http\Request;
 use App\Models\Produit;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class ProduitController extends Controller
@@ -12,10 +13,11 @@ class ProduitController extends Controller
     //
     public function index()
     {
+        $username = Auth::user()->name;
         $categories = Categorie::all();
         $name = $_GET['query'] ?? '';
         $produits = Produit::with('categorie')->where('name', 'LIKE', '%' . $name . '%')->orderBy('created_at', 'ASC')->paginate(4);
-        return view('dashbod_admin', compact('produits', 'categories'));
+        return view('dashbod_admin', compact('produits', 'categories','username'));
     }
 
 
