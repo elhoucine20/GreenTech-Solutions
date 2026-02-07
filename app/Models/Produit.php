@@ -20,7 +20,7 @@ protected $fillable = [
 ];
     //    protected $guarded=["id"];
 
-       // Un produit appartient à une catégorie
+       
        public function categorie():BelongsTo
        {
            return $this->belongsTo(Categorie::class);

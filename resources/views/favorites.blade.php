@@ -137,7 +137,7 @@
                 <!-- Right Menu -->
                 <div class="flex items-center gap-4">
                     <!-- Back to Shop -->
-                    <a href="client-dashboard.html" class="hidden sm:flex items-center gap-2 px-5 py-3 bg-earth-100 hover:bg-earth-200 text-earth-800 rounded-xl transition font-semibold">
+                    <a href="{{route('client_dashbord')}}" class="hidden sm:flex items-center gap-2 px-5 py-3 bg-earth-100 hover:bg-earth-200 text-earth-800 rounded-xl transition font-semibold">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                         </svg>
@@ -153,7 +153,7 @@
                     </a>
                     
                     <!-- User Account -->
-                    <a href="#" class="hidden sm:flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-xl transition shadow-lg shadow-red-500/30 font-semibold">
+                    <a href="/Logout" class="hidden sm:flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-xl transition shadow-lg shadow-red-500/30 font-semibold">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                         </svg>
@@ -227,13 +227,16 @@
                          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     
                     <!-- Wishlist Button -->
-              
+                 <form method="POST" action="{{ route('DeleteFavorite',$favorite) }}">
+                @csrf 
+                @method('DELETE')
                       
-                         <button type="submit"  class=" toggle-class   absolute top-3 right-3 p-2.5 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-leaf-500 hover:text-white transition-all">
-                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                             </svg>
-                         </button>
+               <button  type="submit" class="toggle-class absolute top-3 right-3 p-2.5 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-leaf-600 transition-all">
+                   <svg class="w-5 h-5 text-leaf-500 hover:text-white" fill="currentColor" stroke="currentColor" viewBox="0 0 24 24">
+                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                   </svg>
+               </button>
+               </form>
                     
                     <!-- Badge -->
                     <div class="absolute top-3 left-3">
@@ -252,7 +255,7 @@
                     <h3 class="text-lg font-bold text-leaf-900 mb-2">{{ $favorite->produit->name }}</h3>
                     
                     <!-- Description -->
-                    <p class="text-sm text-earth-600 mb-3 line-clamp-2">{{ $favorite->produit->description }}</p>
+                    <p class="text-sm text-earth-600 mb-3 line-clamp-2">{{$favorite->produit->description }}</p>
                     
                     <!-- Rating -->
                     <div class="flex items-center gap-2 mb-4">

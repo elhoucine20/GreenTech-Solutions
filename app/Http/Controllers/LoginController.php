@@ -11,75 +11,65 @@ use Mockery\Generator\StringManipulation\Pass\Pass;
 class LoginController extends Controller
 {
     //
-    public function index(){
+    public function index()
+    {
         return View('authentification/login');
-        }
-            public function toLogin(Request $request){
-                if ($request) {
-                    $pass1 = $request->confirmPassword;
-                    $pass2 = $request->password;
-                    if ($pass1 == $pass2) {
-                     
-                    // dd($request->post());
-                    Validate::Valider($request);
-                    
-                    Utilisateur::create([
-                        'name'=>$request->name,
-                        'email'=>$request->email,
-                        'password'=>$request->password,
-                        'role'=>'client',
-                        ]);
-                    return view('authentification/login');
-                    }else{
-                        return view('authentification/inscrire');
-                    }
+    }
+    public function toLogin(Request $request)
+    {
+        if ($request) {
+            $pass1 = $request->confirmPassword;
+            $pass2 = $request->password;
+            if ($pass1 == $pass2) {
 
-                }
-            }
-
-
-            
-            public function login(Request $request){
-                $pass = $request->password;
-                
-                $email = $request->email;
-                $credentials = ['email'=>$email,'password'=>$pass];
-                Auth::attempt($credentials);
                 // dd($request->post());
-                if (Auth::attempt($credentials)){
-                    if (Auth::user()->role=="admin") {
-                        $request->session()->regenerate();
-                         return to_route('index');                     
-                         
-                         }else{
-                        $request->session()->regenerate();
-                        // return to_route('404');
-                         return to_route('client_dashbord');                     
+                Validate::Valider($request);
 
-                        
-
-                    }
-                    
-                    }else{
-                            return back()->withErrors(['email'=>'email ou password incorrecgt'])->onlyInput('email');
-                        }
-                        
-                        return view('authentification/login');
-        }
-        
-        
-        
-        
-            public function inscrire(){
-            
-            return View('authentification/inscrire');
-            }
-
-
-
-            public function Logout(){
-                Auth::logout();
+                Utilisateur::create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => $request->password,
+                    'role' => 'client',
+                ]);
                 return view('authentification/login');
+            } else {
+                return view('authentification/inscrire');
             }
+        }
+    }
 
+
+
+    public function login(Request $request)
+    {
+        $pass = $request->password;
+
+        $email = $request->email;
+        $credentials = ['email' => $email, 'password' => $pass];
+        Auth::attempt($credentials);
+        // dd($request->post());
+        if (Auth::attempt($credentials)) {
+            if (Auth::user()->role == "admin") {
+                $request->session()->regenerate();
+                return to_route('index');
+            } else {
+                $request->session()->regenerate();
+                return to_route('client_dashbord');
+            }
+        } else {
+            return back()->withErrors(['email' => 'email ou password incorrecgt'])->onlyInput('email');
+        }
+        return view('authentification/login');
+    }
+
+    public function inscrire()
+    {
+        return View('authentification/inscrire');
+    }
+
+    public function Logout()
+    {
+        Auth::logout();
+        return view('authentification/login');
+    }
 }

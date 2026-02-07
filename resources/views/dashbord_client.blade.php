@@ -189,24 +189,38 @@
 
             <!-- Product Card 1 -->
             @foreach($produits as $produit)
-
+            
             <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden border border-leaf-100">
                 <!-- Image -->
                 <div class="relative h-64 bg-gradient-to-br from-leaf-50 to-earth-50 overflow-hidden group">
                     <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?w=500&h=400&fit=crop" 
-                         alt="Monstera Deliciosa" 
-                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    alt="Monstera Deliciosa" 
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     
                     <!-- Wishlist Button -->
                     <form method="POST" action="{{ route('Myfavori',$produit->id) }}">
                      @csrf 
                      @method('PUT')
-                      
-                         <button type="submit"  class=" toggle-class   absolute top-3 right-3 p-2.5 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-leaf-500 hover:text-white transition-all">
-                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                             </svg>
-                         </button>
+                    @php
+                        $Favorite = $favorites->contains('produit_id', $produit->id);
+                       @endphp
+
+                      @if($Favorite)
+                    <button  type="submit" class="toggle-class absolute top-3 right-3 p-2.5 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-leaf-600 transition-all">
+                   <svg class="w-5 h-5 text-leaf-500 hover:text-white" fill="currentColor" stroke="currentColor" viewBox="0 0 24 24">
+                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                   </svg>
+                        </button>
+                     
+                     @else
+                     <button type="submit"  class=" toggle-class   absolute top-3 right-3 p-2.5 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-leaf-500 hover:text-white transition-all">
+                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                         </svg>
+                     </button>
+                          @endif
+
+
                     </form>
                      <!-- </a> -->
                     

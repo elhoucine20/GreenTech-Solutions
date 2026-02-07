@@ -19,10 +19,13 @@ class clientController extends Controller
         $categories = Categorie::all();
         $name = $_GET['query'] ?? '';
         $produits = Produit::with('categorie')->where('name', 'LIKE', '%' . $name . '%')->orderBy('created_at', 'ASC')->paginate(4);
-        return view('dashbord_client', compact('produits', 'categories'));
+
+         $favorites = Favorite::where('utilisateur_id', Auth::user()->id)
+                              ->with('produit') 
+                              ->get();
+        return view('dashbord_client', compact('produits', 'categories','favorites'));
 
     }
-
 
         public function filtrage($id)
     {
@@ -44,9 +47,20 @@ class clientController extends Controller
     }
 
      public function lesFavorites(){
-         $produits = Favorite::where('utilisateur_id', auth()->user()->id)
+        
+         $produits = Favorite::where('utilisateur_id', Auth::user()->id)
                               ->with('produit') 
                               ->get();
                return view('favorites', compact('produits'));
      }
+
+
+
+    public function destroy(Favorite $favorite)
+    {
+        
+      Favorite::where('produit_id',$favorite->produit->id)->delete($favorite->id);
+      return to_route('client_dashbord');
+    }
+
 }

@@ -35,6 +35,7 @@ Route::controller(clientController::class)->middleware(clientMiddleware::class)-
 
     Route::put('/Myfavori/{produit}',"CreateFavorite")->name('Myfavori');
     Route::get('/favories',"lesFavorites")->name('favories');
+    Route::delete('/DeleteFavorite/{favorite}',"destroy")->name('DeleteFavorite');
     
 });
 

@@ -16,14 +16,11 @@ return new class extends Migration
             $table->string('name',30);
             $table->decimal('prix',2,0,8);
             $table->string('description',150);
-
-            $table->unsignedBigInteger('category_id'); // clé étrangère
+            $table->unsignedBigInteger('category_id');
             $table->foreignId('categorie_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
-
-
 
     /**
      * Reverse the migrations.
