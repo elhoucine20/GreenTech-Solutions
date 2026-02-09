@@ -129,7 +129,7 @@
     <!-- Header -->
     <div class="bg-white/90 backdrop-blur-lg border-b border-leaf-200 shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <h2 class="text-3xl font-bold text-leaf-900 flex items-center gap-3">Hello {{$username}}</h2>
+            <h2 class="text-3xl font-bold text-leaf-900 flex items-center gap-3">Hello </h2>
 
             <!-- Title -->
             <div style="display: flex;justify-content:space-between"  class="mb-6">

@@ -28,7 +28,9 @@ Route::get('/hi', function(){
  
 
 // Route::get('/dashbord', [CategorieController::class, 'index']);
-Route::controller(clientController::class)->middleware(clientMiddleware::class)->group(function(){
+Route::controller(clientController::class)->
+// middleware(clientMiddleware::class)->
+group(function(){
 
     Route::get('/client_dashbord',"index")->name('client_dashbord');
     Route::get('/filtrage/{id}',"filtrage");
@@ -42,7 +44,9 @@ Route::controller(clientController::class)->middleware(clientMiddleware::class)-
 // Logout
 Route::get('/Logout',[LoginController::class,"Logout"]);
 
-Route::controller(ProduitController::class)->middleware(userMiddleware::class)->group(function(){
+Route::controller(ProduitController::class)
+// ->middleware(userMiddleware::class)
+->group(function(){
 
     Route::get('/dashbord', 'index')->name('index');
     // dashbord_client

@@ -201,6 +201,7 @@
                     <form method="POST" action="{{ route('Myfavori',$produit->id) }}">
                      @csrf 
                      @method('PUT')
+                     
                     @php
                         $Favorite = $favorites->contains('produit_id', $produit->id);
                        @endphp
