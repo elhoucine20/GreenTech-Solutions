@@ -19,6 +19,7 @@ use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\clientController;
+use App\Http\Controllers\RoleController;
 use App\Http\Middleware\clientMiddleware;
 use App\Http\Middleware\userMiddleware;
 
@@ -67,3 +68,11 @@ Route::get('/showlogin', [LoginController::class, 'index']);
 
 
 
+
+// phase 3
+Route::get('/add-role',[RoleController::class, 'create'])->name('add-role');
+Route::get('/roles',[RoleController::class,'index']);
+Route::post('/store-role',[RoleController::class,'store'])->name('store-role');
+Route::put('Modifier-role',[RoleController::class,'edit']);
+
+Route::get('/statistique',[RoleController::class,'show'])->name('statistique');

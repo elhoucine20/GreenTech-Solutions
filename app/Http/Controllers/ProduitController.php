@@ -13,11 +13,11 @@ class ProduitController extends Controller
     //
     public function index()
     {
-        $username = Auth::user()->name;
+        // $username = Auth::user()->name;
         $categories = Categorie::all();
         $name = $_GET['query'] ?? '';
-        $produits = Produit::with('categorie')->where('name', 'LIKE', '%' . $name . '%')->orderBy('created_at', 'ASC')->paginate(4);
-        return view('dashbod_admin', compact('produits', 'categories','username'));
+        $produits = Produit::with('categorie')->where('name', 'LIKE', '%'  . '%')->orderBy('created_at', 'ASC')->paginate(4);
+        return view('dashbod_admin', compact('produits', 'categories'));
     }
 
 

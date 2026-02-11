@@ -10,84 +10,84 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<style>
-    /* Minimal Modern Design */
-    .modal-content {
-        border: none;
-        border-radius: 20px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-    }
-    
-    .modal-header {
-        background-color: #1a202c;
-        color: white;
-        padding: 28px 32px;
-        border-bottom: none;
-        border-radius: 20px 20px 0 0;
-    }
-    
-    .modal-title {
-        font-size: 26px;
-        font-weight: 700;
-        letter-spacing: -0.5px;
-    }
-    
-    .btn-close {
-        filter: brightness(0) invert(1);
-    }
-    
-    .modal-body {
-        padding: 32px;
-    }
-    
-    .modal-body strong {
-        display: inline-block;
-        color: #718096;
-        font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: 1.2px;
-        margin-bottom: 6px;
-        font-weight: 600;
-    }
-    
-    .modal-body p {
-        color: #1a202c;
-        font-size: 17px;
-        margin: 0;
-        padding-bottom: 20px;
-        border-bottom: 1px solid #e2e8f0;
-    }
-    
-    .modal-body .col-12:last-child p {
-        border-bottom: none;
-    }
-    
-    .modal-body .col-md-6:nth-child(2) p {
-        color: #38a169;
-        font-size: 24px;
-        font-weight: 700;
-    }
-    
-    .modal-footer {
-        border-top: none;
-        padding: 0 32px 32px;
-    }
-    
-    .btn-secondary {
-        background-color: #1a202c;
-        border: none;
-        padding: 12px 32px;
-        border-radius: 10px;
-        font-weight: 600;
-        transition: all 0.3s;
-    }
-    
-    .btn-secondary:hover {
-        background-color: #2d3748;
-        transform: translateY(-1px);
-    }
-</style>
-    
+    <style>
+        /* Minimal Modern Design */
+        .modal-content {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            background-color: #1a202c;
+            color: white;
+            padding: 28px 32px;
+            border-bottom: none;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .modal-title {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .btn-close {
+            filter: brightness(0) invert(1);
+        }
+
+        .modal-body {
+            padding: 32px;
+        }
+
+        .modal-body strong {
+            display: inline-block;
+            color: #718096;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .modal-body p {
+            color: #1a202c;
+            font-size: 17px;
+            margin: 0;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .modal-body .col-12:last-child p {
+            border-bottom: none;
+        }
+
+        .modal-body .col-md-6:nth-child(2) p {
+            color: #38a169;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .modal-footer {
+            border-top: none;
+            padding: 0 32px 32px;
+        }
+
+        .btn-secondary {
+            background-color: #1a202c;
+            border: none;
+            padding: 12px 32px;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background-color: #2d3748;
+            transform: translateY(-1px);
+        }
+    </style>
+
     <script>
         tailwind.config = {
             theme: {
@@ -125,40 +125,66 @@
 </head>
 
 <body class="bg-gradient-to-br from-leaf-50 via-white to-earth-50 min-h-screen">
-    
+
     <!-- Header -->
     <div class="bg-white/90 backdrop-blur-lg border-b border-leaf-200 shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <h2 class="text-3xl font-bold text-leaf-900 flex items-center gap-3">Hello </h2>
 
             <!-- Title -->
-            <div style="display: flex;justify-content:space-between"  class="mb-6">
+            <div style="display: flex;justify-content:space-between" class="mb-6">
                 <div>
                     <!-- <div style="display: flex; justify-content:space-between"> -->
-           
-                
+
+
                     <h1 class="text-3xl font-bold text-leaf-900 flex items-center gap-3">
                         <svg class="w-10 h-10 text-leaf-600" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
                         </svg>
                         Plant Catalog Dashboard
                     </h1>
-                  
-                
-                <!-- </div> -->
+
+
+                    <!-- </div> -->
                     <p class="text-earth-600 mt-1">Manage your botanical inventory</p>
                 </div>
 
+                <!-- add role -->
+                <a href="{{route('add-role')}}">
+                    <button
+                        style="background-color: blue;"
+                       
+                        class="px-4 py-2 rounded-2xl bg-leaf-500 text-white font-semibold hover:bg-leaf-600 transition">
+                        + Add Role
+                    </button>
+                </a>
+                <a href="{{route('inscrire')}}">
+                <button
+                    style="background-color: blue;"
+                    
+                    class="px-4 py-2 rounded-2xl bg-leaf-500 text-white font-semibold hover:bg-leaf-600 transition">
+                    + Add User
+                </button>
+                </a>
+                <!-- statistiques -->
+                <a href="{{route('statistique')}}">
+                    <button
+                        style="background-color: blue;"
+                       
+                        class="px-4 py-2 rounded-2xl bg-leaf-500 text-white font-semibold hover:bg-leaf-600 transition">
+                        statistiques
+                    </button>
+                </a>
                 <!-- User Account -->
-                 <div>
-                   <!-- <form action=""></form> -->
-                     <a href="/Logout" class="hidden sm:flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-xl transition shadow-lg shadow-red-500/30 font-semibold">
-         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                </svg>
-      Logout
-  </a>
-                 </div>
+                <div>
+                    <!-- <form action=""></form> -->
+                    <a href="/Logout" class="hidden sm:flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-xl transition shadow-lg shadow-red-500/30 font-semibold">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                        </svg>
+                        Logout
+                    </a>
+                </div>
             </div>
 
 
@@ -311,49 +337,49 @@
 
                     </div>
                 </div>
-         </div>
-         <!-- modal -->
-                      <div class="modal fade" id="produitModal{{ $produit->id }}" tabindex="-1" aria-hidden="true">
-                          <div class="modal-dialog modal-lg modal-dialog-centered">
-                              <div class="modal-content">
-                  
-                                  <div class="modal-header">
-                                      <h5 class="modal-title">Produit Details</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                  </div>
-                  
-                                  <div class="modal-body">
-                                      <div class="row">
-                                          <div class="col-md-6 mb-3">
-                                              <strong>Name:</strong>
-                                              <p>{{ $produit->name }}</p>
-                                          </div>
-                  
-                                          <div class="col-md-6 mb-3">
-                                              <strong>Price:</strong>
-                                              <p>{{ $produit->prix }} MAD</p>
-                                          </div>
-                  
-                                          <div class="col-12 mb-3">
-                                              <strong>Description:</strong>
-                                              <p>{{ $produit->description }}</p>
-                                          </div>
-                  
-                                          <div class="col-12">
-                                              <strong>Category:</strong>
-                                              <p>{{ $produit->categorie->name ?? '—' }}</p>
-                                          </div>
-                                      </div>
-                                  </div>
-                  
-                                  <div class="modal-footer">
-                                      <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                  </div>
-                  
-                              </div>
-                          </div>
-                      </div>
-                      <!-- fin modal -->
+            </div>
+            <!-- modal -->
+            <div class="modal fade" id="produitModal{{ $produit->id }}" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <h5 class="modal-title">Produit Details</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <strong>Name:</strong>
+                                    <p>{{ $produit->name }}</p>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <strong>Price:</strong>
+                                    <p>{{ $produit->prix }} MAD</p>
+                                </div>
+
+                                <div class="col-12 mb-3">
+                                    <strong>Description:</strong>
+                                    <p>{{ $produit->description }}</p>
+                                </div>
+
+                                <div class="col-12">
+                                    <strong>Category:</strong>
+                                    <p>{{ $produit->categorie->name ?? '—' }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- fin modal -->
 
             @endforeach
         </div>
