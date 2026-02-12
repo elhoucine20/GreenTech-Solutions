@@ -81,5 +81,7 @@ class RoleController extends Controller
     public function destroy(string $id)
     {
         //
+        Role::destroy($id);
+        return $this->index();
     }
 }

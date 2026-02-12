@@ -76,3 +76,4 @@ Route::post('/store-role',[RoleController::class,'store'])->name('store-role');
 Route::put('Modifier-role',[RoleController::class,'edit']);
 
 Route::get('/statistique',[RoleController::class,'show'])->name('statistique');
+Route::get('/supprimer-role/{id}',[RoleController::class,'destroy'])->name('supprimer-role');

@@ -157,8 +157,17 @@ tr:hover{
 </head>
 <body>
 
-<h1>📊 Statistique Dashboard</h1>
-<p>Gestion des rôles et utilisateurs</p>
+    <h1>📊 Statistique Dashboard</h1>
+    <div style="display: flex; justify-content:space-between">
+    <p>Gestion des rôles et utilisateurs</p>
+
+                    <a href="{{route('index')}}">
+                        <button class="px-4 py-2 rounded-2xl bg-leaf-500 text-white font-semibold hover:bg-leaf-600 transition">
+                            dashbord
+
+                        </button>
+                    </a>
+</div>
 
 <!-- STATS CARDS -->
 <div class="stats">
@@ -189,8 +198,14 @@ tr:hover{
                 <td>{{$role->id}}</td>
                 <td>{{$role->name}}</td>
                 <td>
-                    <button class="btn btn-edit">Modifier</button>
-                    <button class="btn btn-delete">Supprimer</button>
+                    <a href="">
+
+                        <button class="btn btn-edit">Modifier</button>
+                    </a>
+                    <a href="{{route('supprimer-role',$role->id)}}">
+
+                        <button class="btn btn-delete">Supprimer</button>
+                    </a>
                 </td>
             </tr>
             
