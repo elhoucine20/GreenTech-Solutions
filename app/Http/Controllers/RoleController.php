@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Permissions;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Utilisateur;
@@ -27,7 +28,8 @@ class RoleController extends Controller
     public function create()
     {
         //
-        return view('create-role');
+        $permissions = Permissions::all();
+        return view('create-role',compact('permissions'));
     }
 
     /**
@@ -41,10 +43,10 @@ class RoleController extends Controller
             
             ]);
             // dd($request->post());
-        Role::create([
+      $role = Role::create([
             'name'=>$request->role,
-            // 'utilisateur_id'=>NULL
         ]);
+        $role->permissions()->attach($request->permissions);
         return to_route('index');
     }
 
@@ -54,7 +56,7 @@ class RoleController extends Controller
     public function show()
     {
         //
-        $roles = Role::all();
+        $roles = Role::with('permissions')->get();
         $users = Utilisateur::all();
         return View('statistique',compact('roles','users'));
     }
@@ -62,9 +64,10 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(int $id)
     {
         //
+
     }
 
     /**
@@ -72,7 +75,7 @@ class RoleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
     }
 
     /**

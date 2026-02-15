@@ -15,6 +15,9 @@ class LoginController extends Controller
     {
         return View('authentification/login');
     }
+
+
+
     public function toLogin(Request $request)
     {
         if ($request) {
@@ -29,7 +32,6 @@ class LoginController extends Controller
                     'name' => $request->name,
                     'email' => $request->email,
                     'password' => $request->password,
-                    'role' => 'client',
                 ]);
                 return view('authentification/login');
             } else {
@@ -62,6 +64,8 @@ class LoginController extends Controller
         return view('authentification/login');
     }
 
+
+    
     public function inscrire()
     {
         return View('authentification/inscrire');

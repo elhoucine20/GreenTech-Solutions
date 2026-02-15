@@ -22,6 +22,7 @@ use App\Http\Controllers\clientController;
 use App\Http\Controllers\RoleController;
 use App\Http\Middleware\clientMiddleware;
 use App\Http\Middleware\userMiddleware;
+use App\Models\Role;
 
 Route::get('/hi', function(){
  return View('today');
@@ -73,7 +74,14 @@ Route::get('/showlogin', [LoginController::class, 'index']);
 Route::get('/add-role',[RoleController::class, 'create'])->name('add-role');
 Route::get('/roles',[RoleController::class,'index']);
 Route::post('/store-role',[RoleController::class,'store'])->name('store-role');
-Route::put('Modifier-role',[RoleController::class,'edit']);
+// Route::put('Modifier-role',[RoleController::class,'edit']);
 
 Route::get('/statistique',[RoleController::class,'show'])->name('statistique');
 Route::get('/supprimer-role/{id}',[RoleController::class,'destroy'])->name('supprimer-role');
+
+Route::get('/Modifier-role/{id}',[RoleController::class,'edit'])->name('Modifier-role');
+
+Route::put('/update-role/{id}',[RoleController::class,'update'])->name('update-role');
+
+
+

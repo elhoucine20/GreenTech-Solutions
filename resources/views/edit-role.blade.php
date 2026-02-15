@@ -5,52 +5,6 @@
     <title>Create Role</title>
     <style>
 
-        /* Permissions Section */
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group > label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 10px;
-    font-size: 15px;
-}
-
-/* Permissions container */
-.permissions {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-}
-
-/* Each checkbox item */
-.permissions label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px;
-    background-color: #f8f9fa;
-    border: 1px solid #e0e0e0;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-size: 14px;
-}
-
-/* Hover effect */
-.permissions label:hover {
-    background-color: #e8f5e9;
-    border-color: #4CAF50;
-}
-
-/* Checkbox style */
-.permissions input[type="checkbox"] {
-    accent-color: #4CAF50;
-    width: 16px;
-    height: 16px;
-    cursor: pointer;
-}
 
         body {
             font-family: Arial, sans-serif;
@@ -117,29 +71,13 @@
 <div class="card">
     <h2>Create Role</h2>
 
-    <form method="POST" action="{{route('store-role')}}">
+    <form method="POST" action="{{route('update-role',$role->id)}}">
         @csrf 
-        @method('post')
+         @method('PUT')
         <div class="form-group">
             <label for="name">Role Name</label>
-            <input type="text" id="name" name="role" placeholder="par-exemple: admin" required>
+            <input type="text" value="{{$role->name}}" id="name" name="name" placeholder="par-exemple: admin" required>
         </div>
-
-   <div class="form-group">
-            <label>Permissions</label>
-
-            <div class="permissions">
-                @foreach($permissions as $permission)
-                <label>
-                    <input type="checkbox" name="permissions[]" value="{{$permission->id}}">
-                    {{$permission->route_name}}
-                </label>
-                @endforeach
-
-            </div>
-        </div>
-
-
 
         <button type="submit">Create</button>
     </form>

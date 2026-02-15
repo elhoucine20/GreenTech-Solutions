@@ -7,6 +7,135 @@
 
 <style>
 
+
+
+/* ===== MODAL OVERLAY ===== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+
+  /* blur + dim */
+  backdrop-filter: blur(6px) brightness(0.5);
+  -webkit-backdrop-filter: blur(6px) brightness(0.5);
+  background: rgba(0, 0, 0, 0.25);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ===== MODAL BOX ===== */
+.modal-box {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  position: relative;
+
+  transform: scale(0.9) translateY(20px);
+  transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), opacity 0.3s ease;
+  opacity: 0;
+}
+
+.modal-overlay.active .modal-box {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+.modal-box h3 {
+  color: var(--leaf-dark);
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.modal-sub {
+  color: var(--gray);
+  font-size: 0.88rem;
+  margin-bottom: 20px;
+}
+
+/* ===== CLOSE BUTTON ===== */
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: #f3f4f6;
+  border: none;
+  border-radius: 8px;
+  width: 30px;
+  height: 30px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: var(--gray);
+  transition: background 0.2s;
+}
+.modal-close:hover { background: #fee2e2; color: var(--danger); }
+
+/* ===== RADIO ROLES LIST ===== */
+.role-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.role-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.role-option:hover {
+  border-color: var(--leaf);
+  background: var(--leaf-light);
+}
+
+.role-option input[type="radio"] {
+  accent-color: var(--leaf);
+  width: 17px;
+  height: 17px;
+  cursor: pointer;
+}
+
+.role-option input[type="radio"]:checked + span {
+  color: var(--leaf-dark);
+  font-weight: bold;
+}
+
+.role-option:has(input:checked) {
+  border-color: var(--leaf);
+  background: var(--leaf-light);
+}
+
+/* ===== MODAL ACTIONS ===== */
+.modal-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-cancel {
+  flex: 1;
+  background: #f3f4f6;
+  color: var(--gray);
+}
+.btn-cancel:hover { background: #e5e7eb; }
 /* ====== COLORS (leaf / earth theme) ====== */
 :root{
     --leaf-dark:#14532d;
@@ -198,17 +327,19 @@ tr:hover{
                 <td>{{$role->id}}</td>
                 <td>{{$role->name}}</td>
                 <td>
-                    <a href="">
+            @foreach($role->permissions as $permission)
 
+                        <span>{{$permission->route_name}} | </span>
+            @endforeach
+                        
+                    <a href="{{route('Modifier-role',$role->id)}}">
                         <button class="btn btn-edit">Modifier</button>
                     </a>
                     <a href="{{route('supprimer-role',$role->id)}}">
-
                         <button class="btn btn-delete">Supprimer</button>
                     </a>
                 </td>
             </tr>
-            
             @endforeach
         </tbody>
     </table>
@@ -237,7 +368,8 @@ tr:hover{
                 @else
                 <td>
                     <span class="no-role">No Role</span>
-                    <button class="btn btn-add">Add Role</button>
+                    
+                    <button class="btn btn-add" onclick="openRoleModal({{$user->id}})">Add Role</button>
                 </td>
                 @endif
             </tr>
@@ -254,6 +386,62 @@ tr:hover{
         </tbody>
     </table>
 </div>
+<!-- ===== MODAL: Add Role ===== -->
+<div class="modal-overlay" id="addRoleOverlay">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeRoleModal()">✕</button>
 
+    <h3>Assigner un Rôle</h3>
+    <p class="modal-sub">Choisissez un rôle pour cet utilisateur</p>
+
+    <form method="POST" action="{{ route('store-role') }}">
+      @csrf
+      <input type="hidden" name="user_id" id="modalUserId" />
+
+      <div class="role-list" id="roleList">
+        {{-- les rôles seront injectés ici via JS --}}
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn-cancel" onclick="closeRoleModal()">Annuler</button>
+        <button type="submit" class="btn btn-add">Confirmer</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+         // ===== JS =====
+     const roles = @json($roles); // كيجيو من Laravel
+     
+     function openRoleModal(userId) {
+       document.getElementById('modalUserId').value = userId;
+     
+       // بناء الـ radio buttons ديناميكياً
+       const list = document.getElementById('roleList');
+       list.innerHTML = roles.map(role => `
+         <label class="role-option">
+           <input type="radio" name="role_id" value="${role.id}" required />
+           <span>${role.name}</span>
+         </label>
+       `).join('');
+     
+       document.getElementById('addRoleOverlay').classList.add('active');
+     }
+     
+     function closeRoleModal() {
+       document.getElementById('addRoleOverlay').classList.remove('active');
+     }
+     
+     // إغلاق بالكليك خارج الـ modal
+     document.getElementById('addRoleOverlay').addEventListener('click', function(e) {
+       if (e.target === this) closeRoleModal();
+     });
+     
+     // إغلاق بـ ESC
+     document.addEventListener('keydown', e => {
+       if (e.key === 'Escape') closeRoleModal();
+     });
+</script>
 </body>
 </html>

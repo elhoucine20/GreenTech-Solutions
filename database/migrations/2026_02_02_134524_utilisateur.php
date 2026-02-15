@@ -32,6 +32,9 @@ return new class extends Migration
     {
         //
         // Schema::dropIfExists('users','role');
+            Schema::table('utilisateurs', function (Blueprint $table) {
 
+                $table->dropColumn('role_id');
+           });
     }
 };
