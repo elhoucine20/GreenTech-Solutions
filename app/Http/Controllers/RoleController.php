@@ -67,7 +67,8 @@ class RoleController extends Controller
     public function edit(int $id)
     {
         //
-
+       $role = Role::find($id);
+        return view('edit-role',compact('role'));
     }
 
     /**
@@ -75,7 +76,13 @@ class RoleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-
+        //
+        // dd($request->post(),$id);
+        $role = Role::findOrFail($id);
+        $role->update([
+            'name'=>$request->name,
+        ]);
+        return $this->index();
     }
 
     /**
