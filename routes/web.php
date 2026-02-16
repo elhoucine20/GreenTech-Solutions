@@ -86,5 +86,6 @@ Route::put('/update-role/{id}',[RoleController::class,'update'])->name('update-r
 
 Route::post('/ajouter-role',[RoleController::class,'AddRole'])->name('Ajouter-Role');
 
+Route::get('/supprimer-user/{id}',[UserController::class,'destroy'])->name('supprimer-user');
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use App\Models\Utilisateur;
 use Illuminate\Http\Request;
@@ -14,6 +15,10 @@ class UserController extends Controller
     public function index()
     {
         //
+        
+        $roles = Role::all();
+        $users = Utilisateur::all();
+        return View('statistique',compact('roles','users'));
     }
 
     /**

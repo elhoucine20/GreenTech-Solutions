@@ -365,15 +365,18 @@ tr:hover{
                 <td>{{$user->email}}</td>
                 @if($user->role)
                 <td><span class="badge">{{$user->role->name}}</span>
-                <button class="btn btn-edit" >Modifier</button>
-                <button class="btn btn-delete" >Supprimer</button>
-            
+
+                <!-- <a href=""><button class="btn btn-edit" >Modifier</button></a> -->
+
+                <a href="{{route('supprimer-user',$user->id)}}"><button class="btn btn-delete" >Supprimer</button></a>
+                
                 </td>
                 @else
                 <td>
                     <span class="no-role">No Role</span>
                     
                     <button class="btn btn-add" onclick="openRoleModal({{$user->id}})">Add Role</button>
+                    <a href="{{route('supprimer-user',$user->id)}}"><button class="btn btn-delete" >Supprimer</button></a>
                 </td>
                 @endif
             </tr>
