@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -14,7 +15,8 @@ protected $fillable = [
     'name',
     'email',
     'role',
-    'password'
+    'password',
+    'role_id'
 ];
     //
 
@@ -34,5 +36,10 @@ protected $fillable = [
         public function favorite():BelongsToMany{
         // return $this->belongsToMany(Favorite::class);
         return $this->BelongsToMany(Produit::class, 'favorite','utilisateur_id', 'produit_id');
-    }
+        }
+        
+        public function role():BelongsTo{
+        return $this->belongsTo(Role::class);
+        }
+
 }

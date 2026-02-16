@@ -76,7 +76,7 @@
          @method('PUT')
         <div class="form-group">
             <label for="name">Role Name</label>
-            <input type="text" value="{{$role->name}}" id="name" name="name" placeholder="par-exemple: admin" required>
+            <input type="text" value="{{$role->name}}" id="name" name="role_id" placeholder="par-exemple: admin" required>
         </div>
 
         <button type="submit">Create</button>

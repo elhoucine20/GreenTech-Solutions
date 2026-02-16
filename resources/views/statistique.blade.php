@@ -364,7 +364,11 @@ tr:hover{
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
                 @if($user->role)
-                <td><span class="badge">{{$user->role}}</span></td>
+                <td><span class="badge">{{$user->role->name}}</span>
+                <button class="btn btn-edit" >Modifier</button>
+                <button class="btn btn-delete" >Supprimer</button>
+            
+                </td>
                 @else
                 <td>
                     <span class="no-role">No Role</span>
@@ -373,6 +377,36 @@ tr:hover{
                 </td>
                 @endif
             </tr>
+            <!-- ===== MODAL: Add Role ===== -->
+<div class="modal-overlay" id="addRoleOverlay">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeRoleModal()">✕</button>
+
+    <h3>Assigner un Rôle</h3>
+    <p class="modal-sub">Choisissez un rôle pour cet utilisateur</p>
+
+<form method="post" action="{{ route('Ajouter-Role')}}">
+      @csrf
+      @method('POST')
+      <input type="hidden" name="user_id" id="modalUserId" />
+
+      <div class="role-list" id="roleList">
+          @foreach($roles as $role)
+          <label>
+                    <input type="radio" name="role_id" value="{{$role->id}}">
+                    {{$role->name}}
+                </label>
+                @endforeach
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn-cancel" onclick="closeRoleModal()">Annuler</button>
+        <button type="submit" class="btn btn-add">Confirmer</button>
+      </div>
+    </form>
+  </div>
+</div>
+
             <!-- <tr>
                 <td>2</td>
                 <td>Sara</td>
@@ -386,45 +420,13 @@ tr:hover{
         </tbody>
     </table>
 </div>
-<!-- ===== MODAL: Add Role ===== -->
-<div class="modal-overlay" id="addRoleOverlay">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeRoleModal()">✕</button>
-
-    <h3>Assigner un Rôle</h3>
-    <p class="modal-sub">Choisissez un rôle pour cet utilisateur</p>
-
-    <form method="POST" action="{{ route('store-role') }}">
-      @csrf
-      <input type="hidden" name="user_id" id="modalUserId" />
-
-      <div class="role-list" id="roleList">
-        {{-- les rôles seront injectés ici via JS --}}
-      </div>
-
-      <div class="modal-actions">
-        <button type="button" class="btn btn-cancel" onclick="closeRoleModal()">Annuler</button>
-        <button type="submit" class="btn btn-add">Confirmer</button>
-      </div>
-    </form>
-  </div>
-</div>
 
 <script>
          // ===== JS =====
-     const roles = @json($roles); // كيجيو من Laravel
      
      function openRoleModal(userId) {
        document.getElementById('modalUserId').value = userId;
      
-       // بناء الـ radio buttons ديناميكياً
-       const list = document.getElementById('roleList');
-       list.innerHTML = roles.map(role => `
-         <label class="role-option">
-           <input type="radio" name="role_id" value="${role.id}" required />
-           <span>${role.name}</span>
-         </label>
-       `).join('');
      
        document.getElementById('addRoleOverlay').classList.add('active');
      }

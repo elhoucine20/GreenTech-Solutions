@@ -22,6 +22,21 @@ class RoleController extends Controller
         return View('statistique',compact('roles','users'));
     }
 
+    // add role to user 
+        public function AddRole(Request $request){
+        // dd($request->post());
+        // dd($request->role_id,$request->user_id);
+        $user_id =  $request->user_id;
+        $role_id = $request->role_id;
+
+        $user = Utilisateur::findOrFail($user_id);
+        $user->update([
+            'role_id'=>intval($role_id),
+        ]);
+        return $this->index();
+    }
+
+
     /**
      * Show the form for creating a new resource.
      */

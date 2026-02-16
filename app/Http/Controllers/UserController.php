@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Utilisateur;
 use Illuminate\Http\Request;
 
@@ -69,4 +70,5 @@ class UserController extends Controller
         return $this->index();
 
     }
+
 }

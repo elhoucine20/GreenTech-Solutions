@@ -20,6 +20,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\clientController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\clientMiddleware;
 use App\Http\Middleware\userMiddleware;
 use App\Models\Role;
@@ -82,6 +83,8 @@ Route::get('/supprimer-role/{id}',[RoleController::class,'destroy'])->name('supp
 Route::get('/Modifier-role/{id}',[RoleController::class,'edit'])->name('Modifier-role');
 
 Route::put('/update-role/{id}',[RoleController::class,'update'])->name('update-role');
+
+Route::post('/ajouter-role',[RoleController::class,'AddRole'])->name('Ajouter-Role');
 
 
 
